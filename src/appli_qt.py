@@ -26,11 +26,13 @@ def handleClick(quadTree,event):
         for realy in range(y - 5, y + 5):
             if quadTree.contains((realx, realy)):
                 print("Le point", realx, realy, "est dans le quadTree")
+                pygame.mixer.Sound("../lib/sounds/bow.wav").play()
                 trouve = True
                 #quadTree.remove((x,y)) #On retire le point qui est à nos coordonnées
     if not trouve:  #Non trouvé donc on ajout un point
         print("Ce point n'est pas dans le quadTree")
         quadTree.add((x,y))
+        pygame.mixer.Sound("../lib/sounds/pew.wav").play()
 
 def handleEvents(quadTree):
     for event in pygame.event.get(): # event handling loop
@@ -55,9 +57,10 @@ def ensemble_points(nb_points, w, h):
     return s
 
 def main():
-    capacite = input("Veuillez entrer la capacité maximal que QuadTree peut contenir ")
+    capacite = input("Veuillez entrer la capacitée maximale que QuadTree peut contenir ")
     pygame.init()
-    pygame.display.set_caption('Appli quadTree')
+    pygame.mixer.init()
+    pygame.display.set_caption('QuadTree Project')
     ecran = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
     refresh(ecran)
 
