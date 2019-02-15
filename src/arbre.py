@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 class Arbre:
     def __init__(self, etiquette, enfants):
         self.__etiquette = etiquette
@@ -12,7 +13,7 @@ class Arbre:
         return self.__enfants
 
     @classmethod
-    def Feuille(cls_arbre, etiquette): #méthode statique
+    def Feuille(cls_arbre, etiquette):  # méthode statique
         return cls_arbre(etiquette, [])
 
     def add(self, nourisson):
