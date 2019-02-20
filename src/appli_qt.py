@@ -5,10 +5,12 @@ from quadtree import QuadTree, Rectangle
 
 global FPSCLOCK
 FPS = 30
-WINDOWWIDTH = 512
+WINDOWWIDTH = 1024
 WINDOWHEIGHT = 512
 ARRIERE_PLAN = (42, 17, 51)
 
+red = (200,0,0)
+green = (0,200,0)
 
 class Quitte(BaseException):
     pass
@@ -26,18 +28,20 @@ def isClick(event):
 def handleClick(quadTree, event):
     x, y = pygame.mouse.get_pos()
     trouve = False
-    for realx in range(x - 5, x + 5):
-        for realy in range(y - 5, y + 5):
-            if quadTree.contains((realx, realy)):
-                print("Le point", realx, realy, "est dans le quadTree")
-                pygame.mixer.Sound("../lib/sounds/bow.wav").play()
-                trouve = True
-                # quadTree.remove((x,y)) #On retire le point qui est à nos coordonnées
-    if not trouve:  # Non trouvé donc on ajout un point
-        print("Ce point n'est pas dans le quadTree")
-        quadTree.add((x, y))
-        pygame.mixer.Sound("../lib/sounds/pew.wav").play()
-
+    if x<512 :
+        for realx in range(x - 5, x + 5):
+            for realy in range(y - 5, y + 5):
+                if quadTree.contains((realx, realy)):
+                    print("Le point", realx, realy, "est dans le quadTree")
+                    pygame.mixer.Sound("../lib/sounds/bow.wav").play()
+                    trouve = True
+                    # quadTree.remove((x,y)) #On retire le point qui est à nos coordonnées
+        if not trouve:  # Non trouvé donc on ajout un point
+            print("Ce point n'est pas dans le quadTree")
+            quadTree.add((x, y))
+            pygame.mixer.Sound("../lib/sounds/pew.wav").play()
+    else :
+        print("Menu")
 
 def handleEvents(quadTree):
     for event in pygame.event.get():  # event handling loop
@@ -74,7 +78,7 @@ def main():
     ecran = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
     refresh(ecran)
 
-    e = ensemble_points(24, 512, 512)  # création de 8 points aléatoires
+    e = ensemble_points(0, 512, 512)  # création de 8 points aléatoires
     # dans un univers de taille
     # 512x512
     region = Rectangle((0, 0), (512, 512))
