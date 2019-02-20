@@ -143,7 +143,7 @@ class QuadTree(Arbre):
             if enfant.contains(point):
                 enfant.remove(point)
 
-        if (len(self.elements()))<=self.capacite:
+        if (len(self.elements())) <= self.capacite:
             del self.enfants()[:]
 
     def dessine(self, s):

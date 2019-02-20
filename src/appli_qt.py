@@ -9,16 +9,17 @@ WINDOWWIDTH = 1024
 WINDOWHEIGHT = 512
 ARRIERE_PLAN = (42, 17, 51)
 
-red = (200,0,0)
-green = (0,200,0)
+red = (200, 0, 0)
+green = (0, 200, 0)
+
 
 class Quitte(BaseException):
     pass
 
 
 def isQuitEvent(event):
-    return (event.type == pygame.QUIT
-            or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE))
+    return (event.type == pygame.QUIT or
+            (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE))
 
 
 def isClick(event):
@@ -28,20 +29,22 @@ def isClick(event):
 def handleClick(quadTree, event):
     x, y = pygame.mouse.get_pos()
     trouve = False
-    if x<512 :
+    if x < 512:
         for realx in range(x - 5, x + 5):
             for realy in range(y - 5, y + 5):
                 if quadTree.contains((realx, realy)):
                     print("Le point", realx, realy, "est dans le quadTree")
                     pygame.mixer.Sound("../lib/sounds/bow.wav").play()
                     trouve = True
-                    quadTree.remove((realx,realy)) #On retire le point qui est à nos coordonnées
+                    # On retire le point qui est à nos coordonnées
+                    quadTree.remove((realx, realy))
         if not trouve:  # Non trouvé donc on ajout un point
             print("Ce point n'est pas dans le quadTree")
             quadTree.add((x, y))
             pygame.mixer.Sound("../lib/sounds/pew.wav").play()
-    else :
+    else:
         print("Menu")
+
 
 def handleEvents(quadTree):
     for event in pygame.event.get():  # event handling loop
