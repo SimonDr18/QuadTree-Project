@@ -35,7 +35,7 @@ def handleClick(quadTree, event):
                     print("Le point", realx, realy, "est dans le quadTree")
                     pygame.mixer.Sound("../lib/sounds/bow.wav").play()
                     trouve = True
-                    # quadTree.remove((x,y)) #On retire le point qui est à nos coordonnées
+                    quadTree.remove((realx,realy)) #On retire le point qui est à nos coordonnées
         if not trouve:  # Non trouvé donc on ajout un point
             print("Ce point n'est pas dans le quadTree")
             quadTree.add((x, y))

@@ -138,7 +138,13 @@ class QuadTree(Arbre):
             self.etiquette().points.add(point)
 
     def remove(self, point):
-        pass
+        self.etiquette().points.remove(point)
+        for enfant in self.enfants():
+            if enfant.contains(point):
+                enfant.remove(point)
+
+        if (len(self.elements()))<=self.capacite:
+            del self.enfants()[:]
 
     def dessine(self, s):
         (x1, y1) = self.etiquette().region.hg
